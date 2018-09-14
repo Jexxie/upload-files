@@ -72,7 +72,7 @@ export default {
         this.file = ""
         this.error = false
       } catch(err) {
-        this.message = "Something went wrong"
+        this.message = err.response.data.error
         this.error = true
       }
     }
