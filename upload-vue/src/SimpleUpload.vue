@@ -57,9 +57,19 @@ export default {
 
   methods: {
     selectFile() {
-      this.file = this.$refs.file.files[0]
+      const file = this.$refs.file.files[0]
+      const allowedTypes = ["image/jpeg", "image/png", "image/gif"]
+      const MAX_SIZE = 200 * 1024
+      const tooLarge = file.size > MAX_SIZE
+
+      if (allowedTypes.includes(file.type) && !tooLarge)  {
+      this.file = file
       this.error = false
       this.message = ""
+      } else {
+        this.error = true;
+        this.message = tooLarge ? `Too large. Max size is ${MAX_SIZE / 1024}Kb` : "Only images are allowed"
+      }
     },
 
     async sendFile() {
