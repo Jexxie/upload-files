@@ -1,6 +1,8 @@
 <template>
   <form @submit.prevent="sendFile" enctype="multipart/form-data">
 
+    <p class="title">Single File Upload</p>
+
     <div v-if="message"
       :class="`message ${error ? 'is-danger' : 'is-success'}`"
     >
@@ -82,7 +84,7 @@ export default {
         this.file = ""
         this.error = false
       } catch(err) {
-        this.message = err.response.data.error
+        this.message = "Something wrong"
         this.error = true
       }
     }
